@@ -1,0 +1,12 @@
+﻿@model FluffyDuffyMunchkinCats.Models.ViewModels.IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+<h1>Fluffy Duffy Munchkin Cats</h1>
+<div>
+    @foreach (var cat in Model.Cats)
+    {
+        <a href="/cats/@cat.Id">@cat.Name</a>
+    }
+</div>
+    <a class="btn" href="/cats/add">Add Cat</a>
