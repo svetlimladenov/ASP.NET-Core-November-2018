@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@Context.Request.Headers["User-Agent"]
+@section SomeSection
+{
+    <h1>Index section</h1>
+}
+
+<h1 asp-name="Svetlin"></h1>
+
+<partial name="DateType/_DateTimePartial" model="@DateTime.Now"/>
