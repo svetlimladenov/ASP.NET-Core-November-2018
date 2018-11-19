@@ -1,0 +1,10 @@
+﻿@using ChushkaToAsp.ViewModels.Products
+@model ChushkaToAsp.ViewModels.Products.ProductBindingModel
+@{
+    ViewData["Title"] = "Delete Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var productId = Model.Id;
+}
+<h1 class="text-center">Create Product</h1>
+<hr class="chushka-bg-color w-50 hr-2" />
+@await Component.InvokeAsync("CrudProducts", new { actionName = "Delete", id =  productId});

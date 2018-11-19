@@ -1,0 +1,12 @@
+﻿@using ChushkaToAsp.ViewModels.Products
+@model ChushkaToAsp.ViewModels.Products.ProductBindingModel
+@{
+    ViewData["Title"] = "Edit Product";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var productId = Model.Id;
+}
+<h1 class="text-center">@ViewData["Title"]</h1>
+<hr class="chushka-bg-color w-50 hr-2" />
+
+@await Component.InvokeAsync("CrudProducts", new { actionName = "Edit", id = productId});
+

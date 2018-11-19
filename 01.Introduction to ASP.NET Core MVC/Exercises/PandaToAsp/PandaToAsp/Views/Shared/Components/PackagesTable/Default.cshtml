@@ -1,0 +1,43 @@
+﻿@model PandaToAsp.Components.PackageTableViewModel
+
+<table class="table table-bordered text-panda">
+    <thead>
+    <tr>
+        <th scope="col" class="text-center text-panda"><h6>#</h6></th>
+        <th scope="col" class="text-center text-panda"><h6>Description</h6></th>
+        <th scope="col" class="text-center text-panda"><h6>Weight</h6></th>
+        <th scope="col" class="text-center text-panda"><h6>Shipping Address</h6></th>
+        <th scope="col" class="text-center text-panda"><h6>Recipient</h6></th>
+        <th scope="col" class="text-center text-panda"><h6>Actions</h6></th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        var counter = 0;
+    }
+
+    @foreach (var shipment in Model.Packages)
+    {
+        counter++;
+        <tr>
+            <th scope="row" class="text-center"><h6>@counter</h6></th>
+            <td class="text-center text-panda"><h6>@shipment.Description</h6></td>
+            <td class="text-center text-panda"><h6>@shipment.Weight</h6></td>
+            <td class="text-center text-panda"><h6>@shipment.ShippingAddress</h6></td>
+            <td class="text-center text-panda"><h6>@shipment.Recipient</h6></td>
+            @if (shipment.PackageStatus == "Pending")
+            {
+                <td class="text-center text-panda"><a href="/Packages/Ship?id=@shipment.Id" class="btn bg-panda text-white">Ship</a></td>
+            }
+            else if (shipment.PackageStatus == "Shipped")
+            {
+                <td class="text-center text-panda"><a href="/Packages/Deliver?id=@shipment.Id" class="btn bg-panda text-white">Deliver</a></td>
+            }
+            else if (shipment.PackageStatus == "Delivered")
+            {
+                <td class="text-center text-panda"><a href="/Packages/Details?id=@shipment.Id" class="btn bg-panda text-white">Details</a></td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,66 @@
+﻿@model ChushkaToAsp.ViewModels.Products.ProductBindingModel
+@*@if (Model.Action == "Edit")
+    {
+        var nameValue = Model.Name;
+        var priceValue = Model.Price;
+        var descriptionValue = Model.Description;
+        var typeValue = Model.Type;
+    }*@
+
+<form asp-controller="Products" asp-action="@Model.Action" class="mx-auto w-50" method="post">
+    @if (Model.Action == "Delete")
+    {
+        @Html.Raw("<fieldset disabled>")
+    }
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" value="@Model.Name" class="form-control" placeholder="Name..." />
+    </div>
+    <input asp-for="Id" type="hidden" value="@Model.Id" />
+    <div class="form-group">
+        <label for="name">Price</label>
+        <label asp-for="Price"></label>
+        <input asp-for="Price" value="@Model.Price" min="0" step="0.10" class="form-control" placeholer="Price..." />
+    </div>
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="4" placeholder="Description...">@Model.Description</textarea>
+    </div>
+    <h2 class="text-center text-mishmash">Product Type</h2>
+    <hr class="w-50 hr-2 chushka-bg-color" />
+    <div class="row justify-content-around">
+        @{
+            var types = new List<string>() { "Food", "Domestic", "Health", "Cosmetic", "Other" };
+        }
+        @foreach (var type in types)
+        {
+            <div class="col-md-2">
+                <label for="@type">@type</label>
+                @if (type == @Model.Type)
+                {
+                    <input name="type" id="@type" value="@type" checked="checked" type="radio" />
+                }
+                else
+                {
+                    <input name="type" id="@type" value="@type" type="radio" />
+                }
+            </div>
+        }
+    </div>
+    <hr class="w-50 hr-2 chushka-bg-color" />
+    <div class="mt-4 d-flex justify-content-center">
+        @if (Model.Action == "Edit" || Model.Action == "Create")
+        {
+            <button type="submit" class="btn chushka-bg-color text-white">@Model.Action</button>
+        }
+    </div>
+    @if (@Model.Action == "Delete")
+    {
+        @Html.Raw("</fieldset>")
+        <input asp-for="Id" type="hidden" value="@Model.Id" />
+        <div class="mt-4 d-flex justify-content-center">
+            <button type="submit" class="btn chushka-bg-color text-white">Delete</button>
+        </div>
+    }
+
+</form>

@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-PandaToAsp-2E1CBA2B-3B84-432C-8587-60A3732F9DC9</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Packages\Create.cshtml" />
+    <Content Remove="Views\Packages\Delivered.cshtml" />
+    <Content Remove="Views\Packages\Details.cshtml" />
+    <Content Remove="Views\Packages\Pending.cshtml" />
+    <Content Remove="Views\Packages\Shipped.cshtml" />
+    <Content Remove="Views\Receipts\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Panda.Data\Panda.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Packages\Create.cshtml" />
+    <None Include="Views\Packages\Delivered.cshtml" />
+    <None Include="Views\Packages\Details.cshtml" />
+    <None Include="Views\Packages\Pending.cshtml" />
+    <None Include="Views\Packages\Shipped.cshtml" />
+    <None Include="Views\Receipts\Index.cshtml" />
+  </ItemGroup>
+
+</Project>
