@@ -35,6 +35,14 @@ namespace WorkingWithDataDemo.Controllers
             [ModelBinder(typeof(GetAllHeadersModelBinder))]
             string allMyHeaders)
         {
+            if (ModelState.IsValid)
+            {
+                return Json(model);
+            }
+            else
+            {
+                return this.View(model); 
+            }
             logger.LogInformation(JsonConvert.SerializeObject(model));
             return Json(model);
         }

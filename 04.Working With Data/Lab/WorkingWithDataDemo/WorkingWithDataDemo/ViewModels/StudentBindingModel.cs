@@ -26,6 +26,7 @@ namespace WorkingWithDataDemo.ViewModels
 
     public class StudentBindingModel
     {
+
         public FullName Name { get; set; }
 
         [Display(Name = "Student type")]
