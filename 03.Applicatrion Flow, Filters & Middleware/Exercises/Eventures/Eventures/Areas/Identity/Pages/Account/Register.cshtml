@@ -1,0 +1,69 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+<div class="row">
+    <div class="mx-auto w-50 text-center">
+        <section>
+            <h3>Register</h3>
+            <form class="mx-auto" method="post">
+                <hr class="hr-2 bg-eventures" />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Input.Username" class="font-weight-bold"></label>
+                        <input asp-for="Input.Username" class="form-control" placeholder="Username..."/>
+                        <span asp-validation-for="Input.Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Input.Email" class="font-weight-bold"></label>
+                        <input asp-for="Input.Email" class="form-control" placeholder="Email..." />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Input.Password" class="font-weight-bold"></label>
+                        <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Input.ConfirmPassword" class="font-weight-bold"></label>
+                        <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Confirm Password"/>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+                <hr class="hr-2 bg-eventures" />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label asp-for="Input.FirstName" class="font-weight-bold"></label>
+                        <input asp-for="Input.FirstName" class="form-control" placeholder="First Name..."/>
+                        <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label asp-for="Input.LastName" class="font-weight-bold"></label>
+                        <input asp-for="Input.LastName" class="form-control" placeholder="Last Name..." />
+                        <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                    <div class="form-group">
+                        <label asp-for="Input.UCN" class="font-weight-bold"></label>
+                        <input asp-for="Input.UCN" class="form-control" placeholder="UCN..."/>
+                        <span asp-validation-for="Input.UCN" class="text-danger"></span>
+                    </div>
+                
+                <hr class="hr-2 bg-eventures" />
+                <div class="form-group">
+                    <button type="submit" class="btn btn-info">Register</button>
+                </div>
+            </form>
+        </section>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

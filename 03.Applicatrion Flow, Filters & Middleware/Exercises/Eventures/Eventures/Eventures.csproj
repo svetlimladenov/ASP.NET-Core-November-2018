@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Eventures.Models\Eventures.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+  </ItemGroup>
+
 </Project>

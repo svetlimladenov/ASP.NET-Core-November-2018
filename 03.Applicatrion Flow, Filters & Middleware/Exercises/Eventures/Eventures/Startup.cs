@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Eventures.Data;
 using Eventures.Models;
+using Eventures.Services.EventsServices;
 using Eventures.Utilities;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Configuration;
@@ -52,8 +53,13 @@ namespace Eventures
 
                     options.User.RequireUniqueEmail = true;
                 })
+                .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSingleton<IEmailSender, EmailSender>();
+            
 
             services.AddAuthorization(options =>
             {
@@ -64,8 +70,12 @@ namespace Eventures
                     });
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddSingleton<IEmailSender, EmailSender>();
+            //use this to work with roles
+            services
+                .AddScoped<IUserClaimsPrincipalFactory<EventureUser>,
+                    UserClaimsPrincipalFactory<EventureUser, IdentityRole>>();
+
+            services.AddScoped<IEventsService, EventsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,6 +98,8 @@ namespace Eventures
 
             app.UseAuthentication();
 
+            Seeder.SeedRoles(roleManager).Wait();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -95,7 +107,7 @@ namespace Eventures
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            Seeder.SeedRoles(roleManager).Wait();
+            
         }
     }
 }

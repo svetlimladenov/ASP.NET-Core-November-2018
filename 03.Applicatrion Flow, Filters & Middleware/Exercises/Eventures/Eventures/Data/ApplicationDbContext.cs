@@ -26,6 +26,8 @@ namespace Eventures.Data
             optionsBuilder.UseSqlServer(_configuration.GetConnectionString("DefaultConnection"));
         }
 
+        public DbSet<Order> Orders { get; set; }
+
         public DbSet<Event> Events { get; set; }
     }
 }

@@ -14,6 +14,11 @@
         <span asp-validation-for="Name.FirstName"></span>
     </div>
     <div>
+        <label asp-for="Name2"></label>
+        <input asp-for="Name2" class="form-control"/>
+        <span asp-validation-for="Name2"></span>
+    </div>
+    <div>
         <label asp-for="Name.LastName"></label>
         <input asp-for="Name.LastName" class="form-control" />
         <span asp-validation-for="Name.LastName"></span>
@@ -53,4 +58,9 @@
 
     <input type="submit" value="Create student" />
 </form>
+
+
+@*@section Scripts{ 
+    <partial name="_ValidationScriptsPartial" />
+}*@
 

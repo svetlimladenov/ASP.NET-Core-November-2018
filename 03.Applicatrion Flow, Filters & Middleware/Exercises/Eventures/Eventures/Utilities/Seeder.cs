@@ -13,15 +13,15 @@ namespace Eventures.Utilities
             bool adminRoleExists = await roleManager.RoleExistsAsync("Admin");
             if (!adminRoleExists)
             {
-                var adminRole = new IdentityRole() { Name = "Admin", NormalizedName = "ADMIN", ConcurrencyStamp = "0" };
-                var result = await roleManager.CreateAsync(adminRole);
+                var adminRole = new IdentityRole() { Name = "Admin" };
+                await roleManager.CreateAsync(adminRole);
             }
 
             bool userRoleExists = await roleManager.RoleExistsAsync("User");
             if (!userRoleExists)
             {
-                var userRole = new IdentityRole() { Name = "User", NormalizedName = "USER", ConcurrencyStamp = "1" };
-                var result = await roleManager.CreateAsync(userRole);
+                var userRole = new IdentityRole() { Name = "User"};
+                await roleManager.CreateAsync(userRole);
             }
         }
     }

@@ -1,0 +1,55 @@
+﻿.bg-eventures {
+    background-color: #AFEEEE;
+}
+
+.text-eventures {
+    color: #202020;
+}
+
+.border-eventures {
+    border: 2px solid #AFEEEE;
+    border-radius: 7px;
+}
+
+.nav-link-white {
+    color: #FFFFFF;
+}
+
+.hr-2 {
+    height: 2px;
+}
+
+.hr-index {
+    height: 4px;
+    background-color: #A9A5A5;
+}
+
+.text-index {
+    color: #a9a5a5;
+}
+
+a {
+    text-underline: none;
+}
+
+    a:hover {
+        outline: none;
+        text-decoration: none;
+    }
+
+tr {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+textarea {
+    resize: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    border: 0;
+    width: 98%;
+}
+

@@ -1,0 +1,48 @@
+﻿@using Eventures.ViewModels.Events
+@model Eventures.ViewModels.Events.AllEventsViewModel
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="text-center">All Events</h1>
+
+<div class="mx-auto w-75">
+    <hr class="bg-eventures hr-2" />
+    <table class="table table-striped justify-content-center">
+        <thead>
+            <tr class="text-center font-weight-bold">
+                <td>#</td>
+                <td>Name</td>
+                <td>Start</td>
+                <td>End</td>
+                <td>Actions</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var counter = 0;
+            }
+
+            @foreach (var item in Model.Events)
+            {
+                counter++;
+                <tr class="text-center my-2">
+                    <td>@counter</td>
+                    <td>@item.Name</td>
+                    <td>@item.Start.ToString("d")</td>
+                    <td>@item.End.ToString("d")</td>
+                    <td>
+                        <form asp-action="BuyTicket">
+                            <label class="font-weight-bold">Tickets</label>
+                            <input asp-for="BuyTicketInputModel.Id" value="@item.Id" hidden="hidden" />
+                            <input asp-for="BuyTicketInputModel.TicketsCount"/>
+                            <input type="submit" value="Order" class="btn btn-info"/>
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,42 @@
+﻿@using Eventures.ViewModels.Events
+@model Eventures.ViewModels.Events.MyEventsViewModel
+@{
+    ViewData["Title"] = "MyEvents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="text-center">My Events</h1>
+
+<div class="mx-auto w-75">
+    <hr class="bg-eventures hr-2" />
+    <table class="table table-striped justify-content-center">
+        <thead>
+            <tr class="text-center font-weight-bold">
+                <td>#</td>
+                <td>Name</td>
+                <td>Start</td>
+                <td>End</td>
+                <td>Tickets</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var counter = 0;
+            }
+
+            @foreach (var singleEvent in Model.MyEvents)
+            {
+                counter++;
+                <tr class="text-center my-2">
+                    <td>@counter</td>
+                    <td>@singleEvent.Name</td>
+                    <td>@singleEvent.Start.ToString("d")</td>
+                    <td>@singleEvent.End.ToString("d")</td>
+                    <td>@singleEvent.Tickets</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
