@@ -1,0 +1,41 @@
+﻿@model Eventures.ViewModels.Orders.AllOrdersViewModel
+
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h1 class="text-center">All Orders</h1>
+
+<div class="mx-auto w-75">
+    <hr class="bg-eventures hr-2" />
+    <table class="table table-striped justify-content-center">
+        <thead>
+            <tr class="text-center font-weight-bold">
+                <td>#</td>
+                <td>Event</td>
+                <td>Customer</td>
+                <td>Ordered On</td>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                var counter = 0;
+            }
+
+            @foreach (var order in Model.Orders)
+            {
+                counter++;
+                <tr class="text-center py-2">
+                    <td>@counter</td>
+                    <td>@order.Event</td>
+                    <td>@order.Customer</td>
+                    <td>@order.OrderedOn</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    <hr class="bg-eventures hr-2" />
+</div>

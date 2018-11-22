@@ -64,7 +64,7 @@ namespace Eventures.Controllers
             var ticketsCount = model.BuyTicketInputModel.TicketsCount;
 
             eventsService.BuyTickets(id,ticketsCount, User);
-            return this.Redirect("/");
+            return this.Redirect("/Events/MyEvents");
         }
 
         public IActionResult MyEvents()

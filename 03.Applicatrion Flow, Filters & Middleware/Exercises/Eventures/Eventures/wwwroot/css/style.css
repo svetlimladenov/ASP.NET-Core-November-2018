@@ -42,6 +42,15 @@ tr {
     margin-left: 0 !important;
 }
 
+table {
+    border-collapse: collapse;
+}
+
+td {
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
 textarea {
     resize: none;
 }
