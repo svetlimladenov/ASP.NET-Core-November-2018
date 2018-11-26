@@ -1,0 +1,13 @@
+﻿@model EditBigTextAdmin.ViewModels.Text.EditTextBindingModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Editing @Model.Name</h2>
+
+<form asp-action="Edit">
+    <input asp-for="Id" value="@Model.Id" hidden/>
+    <textarea asp-for="Content">@Model.Content</textarea>
+    <input type="submit" value="Edit"/>
+</form>
