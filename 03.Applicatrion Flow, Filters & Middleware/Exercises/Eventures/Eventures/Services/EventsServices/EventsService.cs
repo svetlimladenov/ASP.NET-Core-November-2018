@@ -52,7 +52,7 @@ namespace Eventures.Services.EventsServices
             db.SaveChanges();
         }
 
-        public void BuyTickets(string id, int count, ClaimsPrincipal user)
+        public bool CanBuyTickets(string id, int count, ClaimsPrincipal user)
         {
             var order = new Order()
             {
@@ -63,6 +63,12 @@ namespace Eventures.Services.EventsServices
             };
             var hasAnyTickets =
                 db.Orders.FirstOrDefault(x => x.EventId == order.EventId && x.CustomerId == order.CustomerId);
+            var currentEvent = db.Events.FirstOrDefault(e => e.Id == order.EventId);
+            currentEvent.TotalTickets -= count;
+            if (currentEvent.TotalTickets < 0)
+            {
+                return false; 
+            }
             if (hasAnyTickets != null)
             {
                 hasAnyTickets.TicketsCount += count;
@@ -74,6 +80,7 @@ namespace Eventures.Services.EventsServices
 
             
             db.SaveChanges();
+            return true;
         }
 
         public SingleEventViewModel[] GetMyEvents(ClaimsPrincipal user)

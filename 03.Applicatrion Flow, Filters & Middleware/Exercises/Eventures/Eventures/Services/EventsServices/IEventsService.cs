@@ -16,7 +16,7 @@ namespace Eventures.Services.EventsServices
 
         void CreateEvent(EventsBindingModel model, ClaimsPrincipal user);
 
-        void BuyTickets(string id, int count, ClaimsPrincipal user);
+        bool CanBuyTickets(string id, int count, ClaimsPrincipal user);
 
         SingleEventViewModel[] GetMyEvents(ClaimsPrincipal user);
     }

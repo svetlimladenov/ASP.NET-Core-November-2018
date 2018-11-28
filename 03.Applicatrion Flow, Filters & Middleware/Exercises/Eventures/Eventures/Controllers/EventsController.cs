@@ -63,7 +63,11 @@ namespace Eventures.Controllers
             var id = model.BuyTicketInputModel.Id;
             var ticketsCount = model.BuyTicketInputModel.TicketsCount;
 
-            eventsService.BuyTickets(id,ticketsCount, User);
+            var isBought = eventsService.CanBuyTickets(id,ticketsCount, User);
+            if (!isBought)
+            {
+                return BadRequest("You cant buy this much tickets.");
+            }
             return this.Redirect("/Events/MyEvents");
         }
 

@@ -1,8 +1,8 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
-<main class="mt-3 container-fluid">
-    <div class="jumbotron bg-eventures text-center">
+<main class="mt-3 container-fluid w-75">
+    <div class="jumbotron mt-3 bg-eventures text-center">
         @if (!User.IsInRole("Admin"))
         {
             <h3 class="text-black mb-2">Welcome, @User.Identity.Name</h3>
@@ -12,7 +12,7 @@
             <h3 class="text-black mb-2">Greetings, Administrator @User.Identity.Name !</h3>
         }
 
-            <hr class="hr-2 hr-index" />
+        <hr class="hr-2 hr-index" />
         @if (User.IsInRole("Admin"))
         {
             <h3 class="text-index mb-2">Enjoy your work.</h3>
