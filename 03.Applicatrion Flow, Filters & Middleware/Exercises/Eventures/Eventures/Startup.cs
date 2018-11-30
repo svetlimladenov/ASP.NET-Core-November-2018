@@ -71,6 +71,13 @@ namespace Eventures
                     });
             });
 
+            services.AddAuthentication()
+                .AddFacebook(options =>
+                {
+                    options.AppId = Configuration["Authentication:Facebook:AppId"];
+                    options.AppSecret = Configuration["Authentication:Facebook:AppSecret"];
+                });
+
             //use this to work with roles
             services
                 .AddScoped<IUserClaimsPrincipalFactory<EventureUser>,

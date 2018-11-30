@@ -54,6 +54,13 @@ namespace AdvancedTopicsDemo
             });
 
 
+            services.AddAuthentication()
+                .AddFacebook(options =>
+                {
+                    options.AppId = "958004407723309";
+                    options.AppSecret = "2dac2091c9351043c576d25362118813";
+                });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
