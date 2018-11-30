@@ -12,12 +12,14 @@ namespace Eventures.Services.EventsServices
 {
     public interface IEventsService
     {
-        EventsBindingModel[] GetAllEvents();
+        EventsBindingModel[] GetAllEvents(int pageNumber);
 
         void CreateEvent(EventsBindingModel model, ClaimsPrincipal user);
 
         bool CanBuyTickets(string id, int count, ClaimsPrincipal user);
 
         SingleEventViewModel[] GetMyEvents(ClaimsPrincipal user);
+
+        int GetTotalPagesCount();
     }
 }

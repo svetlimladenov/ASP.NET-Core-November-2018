@@ -22,34 +22,39 @@ namespace Eventures.Services.EventsServices
             this.userManager = userManager;
         }
 
-        public EventsBindingModel[] GetAllEvents()
+        public EventsBindingModel[] GetAllEvents(int pageNumber)
         {
-            return this.db.Events.Select(x => new EventsBindingModel()
+            pageNumber--;
+            return this.db.Events.Where(x => x.TotalTickets > 0).Select(x => new EventsBindingModel()
             {
                 Id = x.Id,
                 Name = x.Name,
                 Start = x.Start,
                 End = x.End,
                 Place = x.Place,
-            }).ToArray();
+            }).OrderBy(x => x.Start).Skip(12 * pageNumber).Take(12).ToArray();
         }
 
         public void CreateEvent(EventsBindingModel model, ClaimsPrincipal user)
         {
-            var currentEvent = new Event
+            for (int i = 0; i < 15; i++)
             {
-                Id = model.Id,
-                Name = model.Name,
-                End = model.End,
-                Start = model.Start,
-                Place = model.Place,
-                PricePerTicket = model.PricePerTicket,
-                TotalTickets = model.TotalTickets,
-                UserId = userManager.GetUserId(user),
-            };
+                var currentEvent = new Event
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    End = model.End,
+                    Start = model.Start,
+                    Place = model.Place,
+                    PricePerTicket = model.PricePerTicket,
+                    TotalTickets = model.TotalTickets,
+                    UserId = userManager.GetUserId(user),
+                };
 
-            db.Events.Add(currentEvent);
-            db.SaveChanges();
+                db.Events.Add(currentEvent);
+                db.SaveChanges();
+            }
+
         }
 
         public bool CanBuyTickets(string id, int count, ClaimsPrincipal user)
@@ -59,7 +64,7 @@ namespace Eventures.Services.EventsServices
                 CustomerId = userManager.GetUserId(user),
                 EventId = id,
                 TicketsCount = count,
-                OrderedOn = DateTime.Now,                
+                OrderedOn = DateTime.Now,
             };
             var hasAnyTickets =
                 db.Orders.FirstOrDefault(x => x.EventId == order.EventId && x.CustomerId == order.CustomerId);
@@ -67,7 +72,7 @@ namespace Eventures.Services.EventsServices
             currentEvent.TotalTickets -= count;
             if (currentEvent.TotalTickets < 0)
             {
-                return false; 
+                return false;
             }
             if (hasAnyTickets != null)
             {
@@ -78,7 +83,7 @@ namespace Eventures.Services.EventsServices
                 db.Orders.Add(order);
             }
 
-            
+
             db.SaveChanges();
             return true;
         }
@@ -96,6 +101,11 @@ namespace Eventures.Services.EventsServices
                 }).ToArray();
 
             return myEvents;
+        }
+
+        public int GetTotalPagesCount()
+        {
+            return Math.Abs(this.db.Events.Count() / 12);
         }
     }
 }

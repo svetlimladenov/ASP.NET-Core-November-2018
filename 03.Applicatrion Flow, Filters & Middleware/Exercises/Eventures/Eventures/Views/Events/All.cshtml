@@ -9,40 +9,46 @@
 
 <div class="mx-auto w-75">
     <hr class="bg-eventures hr-2" />
-    <table class="table table-striped justify-content-center">
+    <table class="table justify-content-center">
         <thead>
-            <tr class="text-center font-weight-bold">
-                <td>#</td>
-                <td>Name</td>
-                <td>Start</td>
-                <td>End</td>
-                <td>Actions</td>
-            </tr>
+        <tr class="text-center font-weight-bold">
+            <th>#</th>
+            <th>Name</th>
+            <th>Start</th>
+            <th>End</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
-            @{
-                var counter = 0;
-            }
-
-            @foreach (var item in Model.Events)
-            {
-                counter++;
-                <tr class="text-center my-2">
-                    <td>@counter</td>
-                    <td>@item.Name</td>
-                    <td>@item.Start.ToString("d")</td>
-                    <td>@item.End.ToString("d")</td>
-                    <td>
-                        <form asp-action="BuyTicket">
-                            <label class="font-weight-bold">Tickets</label>
-                            <input asp-for="BuyTicketInputModel.Id" value="@item.Id" hidden="hidden" />
-                            <input asp-for="BuyTicketInputModel.TicketsCount"/>
-                            <input type="submit" value="Order" class="btn btn-info"/>
-                        </form>
-                    </td>
-                </tr>
-            }
-
+        @{  
+            var counter = Model.PageNumber * 12;
+        }
+           
+        @foreach (var item in Model.Events)
+        {
+            counter++;
+            <tr class="text-center my-2">
+                <td>@counter</td>
+                <td>@item.Name</td>
+                <td>@item.Start.ToString("d")</td>
+                <td>@item.End.ToString("d")</td>
+                <td>
+                    <form asp-action="BuyTicket">
+                        <label class="font-weight-bold">Tickets</label>
+                        <input asp-for="BuyTicketInputModel.Id" value="@item.Id" hidden="hidden" />
+                        <input asp-for="BuyTicketInputModel.TicketsCount"/>
+                        <input type="submit" value="Order" class="btn btn-info"/>
+                    </form>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
+    
+    <div class="row justify-content-center" style="margin-top: 40px;">
+        @for (int i = 1; i <= Model.TotalPagesCount; i++)
+        {
+            <a asp-action="All" asp-route-pageNumber="@i" class="btn btn-info ml-2">@i</a>
+        }
+    </div>
 </div>

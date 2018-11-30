@@ -29,10 +29,12 @@ namespace Eventures.Controllers
             _logger = logger;
         }
 
-        public IActionResult All()
+        public IActionResult All(int pageNumber = 1)
         {
             var viewModel = new AllEventsViewModel();
-            viewModel.Events = eventsService.GetAllEvents();
+            viewModel.Events = eventsService.GetAllEvents(pageNumber);
+            viewModel.PageNumber = pageNumber - 1;
+            viewModel.TotalPagesCount = eventsService.GetTotalPagesCount();
             return View(viewModel);
         }
 
