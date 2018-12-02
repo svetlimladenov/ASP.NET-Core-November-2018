@@ -1,9 +1,10 @@
-﻿@model StudentBindingModel
-@using WorkingWithDataDemo.ViewModels
-
+﻿@using WorkingWithDataDemo.ViewModels
+@model WorkingWithDataDemo.ViewModels.StudentBindingModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Create";
 }
+
+<h1>@ViewData["Title"]</h1>
 
 <form asp-action="Create" method="post"
       enctype="multipart/form-data">
@@ -12,11 +13,6 @@
         <label asp-for="Name.FirstName"></label>
         <input asp-for="Name.FirstName" class="form-control" />
         <span asp-validation-for="Name.FirstName"></span>
-    </div>
-    <div>
-        <label asp-for="Name2"></label>
-        <input asp-for="Name2" class="form-control"/>
-        <span asp-validation-for="Name2"></span>
     </div>
     <div>
         <label asp-for="Name.LastName"></label>
@@ -60,7 +56,7 @@
 </form>
 
 
-@*@section Scripts{ 
+@section Scripts
+    {
     <partial name="_ValidationScriptsPartial" />
-}*@
-
+}

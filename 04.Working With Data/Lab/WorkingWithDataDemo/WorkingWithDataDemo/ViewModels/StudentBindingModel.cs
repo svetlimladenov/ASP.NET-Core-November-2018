@@ -27,10 +27,7 @@ namespace WorkingWithDataDemo.ViewModels
 
     public class StudentBindingModel
     {
-
         public FullName Name { get; set; }
-
-        public string Name2 { get; set; }
 
         [Display(Name = "Student type")]
         public StudentType Type { get; set; }
@@ -40,15 +37,14 @@ namespace WorkingWithDataDemo.ViewModels
         [StringLength(10, ErrorMessage = "{0} max len: {1}")]
         public string Bio { get; set; }
 
-
         [MinAge(18, ErrorMessage = "Min age: {0}")]
         public DateTime BirthDay { get; set; }
 
         [Range(typeof(decimal), "0", "79228162514264337593543950335")]
         public decimal CoursesTaken { get; set; }
 
-        //[Required]
-        //[DataType(DataType.Upload)]
+        [Required]
+        [DataType(DataType.Upload)]
         public IFormFile Image { get; set; }
     }
 

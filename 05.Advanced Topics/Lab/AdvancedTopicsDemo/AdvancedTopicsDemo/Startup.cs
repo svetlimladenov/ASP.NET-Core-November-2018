@@ -62,6 +62,12 @@ namespace AdvancedTopicsDemo
                 });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddResponseCompression(options => { options.EnableForHttps = true; });
+
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;             
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,6 +85,7 @@ namespace AdvancedTopicsDemo
             }
 
             app.UseHttpsRedirection();
+            app.UseResponseCompression();
             app.UseStaticFiles();
             app.UseCookiePolicy();
 

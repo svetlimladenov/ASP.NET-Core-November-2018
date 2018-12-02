@@ -12,15 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Views\TempData - Copy\Form.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-    <Content Update="Views\TempData - Copy\ThankYou.cshtml">
-      <Pack>$(IncludeRazorContentInPack)</Pack>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
   </ItemGroup>
 

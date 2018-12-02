@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -12,6 +14,13 @@ namespace WorkingWithDataDemo.Controllers
 {
     public class StudentsController : Controller
     {
+        private readonly IHostingEnvironment environment;
+
+        public StudentsController(IHostingEnvironment environment)
+        {
+            this.environment = environment;
+        }
+
         public IActionResult Create()
         {
             var model = new StudentBindingModel
@@ -23,7 +32,7 @@ namespace WorkingWithDataDemo.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(
+        public async Task<IActionResult> Create(
             StudentBindingModel model,
 
             [FromHeader]
@@ -35,16 +44,21 @@ namespace WorkingWithDataDemo.Controllers
             [ModelBinder(typeof(GetAllHeadersModelBinder))]
             string allMyHeaders)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                return Json(model);
+                // TODO: Persist
+                var fileName = this.environment.WebRootPath + "/files/" + "1.jpg";
+                using (var fileStream = new FileStream(fileName, FileMode.Create))
+                {
+                    await model.Image.CopyToAsync(fileStream);
+                }
+
+                return this.Json(model);
             }
             else
             {
-                return this.View(model); 
+                return this.View(model);
             }
-            logger.LogInformation(JsonConvert.SerializeObject(model));
-            return Json(model);
         }
     }
 }
