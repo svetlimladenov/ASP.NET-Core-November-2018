@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Eventures.Data;
 using Eventures.Models;
+using Eventures.Services.AdministrationsServices;
 using Eventures.Services.EventsServices;
 using Eventures.Services.OrdersServices;
 using Eventures.Utilities;
@@ -85,6 +86,7 @@ namespace Eventures
 
             services.AddScoped<IEventsService, EventsService>();
             services.AddScoped<IOrdersService, OrdersService>();
+            services.AddScoped<IAdministrationsService, AdministrationsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
