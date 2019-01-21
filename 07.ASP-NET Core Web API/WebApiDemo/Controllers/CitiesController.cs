@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApiDemo.Data;
 
 namespace WebApiDemo.Controllers
@@ -19,14 +20,14 @@ namespace WebApiDemo.Controllers
             this.context = context;
         }
 
-        // GET api/values
+        // GET api/cities/
         [HttpGet]
         public ActionResult<IEnumerable<CityInfo>> Get()
         {
             return context.Cities.ToList();
         }
 
-        // GET api/values/5
+        // GET api/cities/Sofia
         [HttpGet("{id}")]
         public ActionResult<CityInfo> Get(string id)
         {
@@ -39,23 +40,35 @@ namespace WebApiDemo.Controllers
             return city;
         }
 
-        // POST api/values
+        // POST api/cities
         [HttpPost]
-        public ActionResult<CityInfo> Post([FromBody] CityInfo cityInfo)
+        public ActionResult<CityInfo> Post(CityInfo cityInfo)
         {
             this.context.Cities.Add(cityInfo);
             this.context.SaveChanges();
 
-            return this.CreatedAtAction(nameof(Get), new {id = cityInfo.Id}, cityInfo);
+            return this.CreatedAtAction(nameof(Get), new {id = cityInfo.Name}, cityInfo);
         }
 
-        // PUT api/values/5
+        // PUT api/cities/Sofia
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<CityInfo> Put(string id, CityInfo cityInfo)
         {
+            var dbId = this.context.Cities.Where(x => x.Name == id).Select(x => x.Id).FirstOrDefault();
+
+            if (dbId == string.Empty)
+            {
+                return NotFound();
+            }
+
+            cityInfo.Id = dbId;
+            this.context.Entry(cityInfo).State = EntityState.Modified;
+            this.context.SaveChanges();
+
+            return cityInfo;
         }
 
-        // DELETE api/values/5
+        // DELETE api/cities/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

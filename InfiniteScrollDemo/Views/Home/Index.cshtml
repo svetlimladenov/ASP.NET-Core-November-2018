@@ -1,0 +1,25 @@
+﻿@model AllPostsViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    @foreach (var post in Model.Posts)
+    {
+        <div class="col-md-6 offset-3 sinle-post">
+            <h1>@post</h1>
+        </div>
+    }
+</div>
+
+
+@section Scripts
+{
+    <script>
+        $('.container').infiniteScroll({
+            path: '.pagination__next',
+            append: '.post',
+            history: false,
+        });
+    </script>
+}
